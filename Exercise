@@ -1,0 +1,24 @@
+def cast(typ):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            result = func(*args, **kwargs)
+            try:
+                return typ(result)
+            except ValueError:
+                return result
+        return wrapper
+    return decorato
+    
+    
+    @cast(float)
+def divide(numerator, denominator):
+    return numerator / denominator
+
+result = divide(2, 3)
+print(result)  # 0.6666666666666666
+
+result = divide(1, 0)
+print(result)  # division by zero
+
+result = divide("2", "3")
+print(result)  # 2.0
